@@ -41,7 +41,7 @@
             $this->setDictionary('pos');
             $this->setDictionary('neu');
 
-            //If dictionary not get give error message
+            //If dictionary not get give error msg
             if (!isset($this->dictionary)) echo 'Error Ignore List not set';
 
             //Run function to get ignore list
