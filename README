@@ -10,12 +10,11 @@ To improve accuracy phpInsight removes 'noise' words.
 
 **v1.1 Updates**
 
-Improvements courtesy of Mark-H (https://github.com/Mark-H/) they can been seen on his Tweetalyzer project (https://github.com/Mark-H/Tweetalyzer)
+Improvements courtesy of Mark-H (https://github.com/Mark-H/) they can been seen on his Tweetalyzer project 
+(https://github.com/Mark-H/Tweetalyzer)
 
     Improvements
     -Load data from a serialized php file instead of the database
-    -General Improvements
-
 
     Copyright (C) 2011  James Hennessey
 
