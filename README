@@ -2,9 +2,18 @@ phpInsight - Sentiment Analysis in PHP
 =========
 ---------
 
-**v0.1**
+**v1.1**
 
-phpInsight is a sentiment classifier. It uses a dictionary of words that are categorised as positive, negative or neutral and a naive bayes algorithm to calculate sentiment. To improve accuracy phpInsight removes 'noise' words to improve accuracy. 
+phpInsight is a sentiment classifier. 
+It uses a dictionary of words that are categorised as positive, negative or neutral and a naive bayes algorithm to calculate sentiment. 
+To improve accuracy phpInsight removes 'noise' words. 
+
+**v1.1 Updates**
+
+Improvements courtesy of Mark-H (https://github.com/Mark-H/) they can been seen on his Tweetalyzer project (https://github.com/Mark-H/Tweetalyzer)
+
+    -Load data from a serialized php file instead of the database
+    -General Improvements
 
 
     Copyright (C) 2011  James Hennessey
@@ -21,3 +30,4 @@ phpInsight is a sentiment classifier. It uses a dictionary of words that are cat
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>   
+a
