@@ -16,9 +16,9 @@ Improvements courtesy of Mark-H (https://github.com/Mark-H/) they can been seen 
     Improvements
     -Load data from a serialized php file instead of the database
 
-**1.2 Updates**
+**1.2 Bug Fix**
 
-Error with how the positive dictionary was serialized.
+Error with how the positive dictionary was serialized fixed.
 
 
     Copyright (C) 2012  James Hennessey
@@ -34,5 +34,4 @@ Error with how the positive dictionary was serialized.
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>   
-a
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
