@@ -42,7 +42,7 @@
             $this->setDictionary('neu');
 
             //If dictionary not get give error msg
-            if (!isset($this->dictionary)) echo 'Error Ignore List not set';
+            if (!isset($this->dictionary)) echo 'Error Dictionary not set';
 
             //Run function to get ignore list
             $this->ignoreList = $this->getList('ign');
@@ -86,13 +86,13 @@
 
                     //If statement so to ignore tokens which are either too long or too short or in the $ignoreList
                     if(strlen($token) > $this->minTokenLength && strlen($token) < $this->maxTokenLength && !in_array($token, $this->ignoreList)){
-                        //If dictionary[token][class] is set
+                      //If dictionary[token][class] is set
                         if(isset($this->dictionary[$token][$class])){
                             //Set count equal to it
                             $count = $this->dictionary[$token][$class];
                         }else{
-                            $count = 0;
-                        }
+                          $count = 0;
+                        }                    
 
                         //Score[class] is calcumeted by $scores[class] x $count +1 divided by the $classTokCounts[class] + $tokCount
                         $scores[$class] *= ($count + 1);
@@ -108,6 +108,7 @@
             //Sort array in reverse order
             arsort($scores);
 
+
             //Classification is the key to the scores array
             $classification = key($scores);
 
@@ -119,16 +120,21 @@
 
         //Function to insert words into array from database
         public function setDictionary($class) {
-            $fn = dirname(dirname(__FILE__)) . '/data/data.' . $class . '.php';
+            /**
+             *  For some people this file extention causes some problems! 
+             */
+
+            $fn = dirname(dirname(__FILE__)) . '/phpInsight/data/data.' . $class . '.php';
             if (file_exists($fn)) {
-                $temp = file_get_contents($fn);
-                $words = unserialize($temp);
+              $temp = file_get_contents($fn);
+              $words = unserialize($temp);
             } else {
-                return 'File does not exist: '.$fn;
+                echo 'File does not exist: '.$fn;
             }
 
             //Loop through all of the entries
             foreach ($words as $word) {
+
                 $this->docCount++;
                 $this->classDocCounts[$class]++;
 
@@ -165,6 +171,7 @@
 
         public function getList($type) //Function to turn words from database in array
         {
+
             //Set up empty word list array
             $wordList = array();
 

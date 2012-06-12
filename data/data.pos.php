@@ -359,7 +359,7 @@ a:11078:{i:0;s:4:"like";i:1;s:8:"awesome
 ";i:360;s:10:"authentic
 ";i:361;s:6:"swell
 ";i:362;s:13:"professional
-";i:363;s:11:"determine
+";i:363;s:11:"determined
 ";i:364;s:9:"grateful
 ";i:365;s:6:"happy
 ";i:366;s:6:"adore
