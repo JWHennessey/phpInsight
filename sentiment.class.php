@@ -3,7 +3,7 @@
      phpInsight is a Naive Bayes classifier to calculate sentiment. The program
      uses a database of words categorised as positive, negative or neutral
 
-     Copyright (C) 2011  James Hennessey
+     Copyright (C) 2012  James Hennessey
 
      This program is free software: you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -105,9 +105,17 @@
 
             }//Close loop for classes
 
+            //Makes the scores relative percents
+            foreach($this->classes as $class) {
+                $total_score += $scores[$class];
+            }
+
+            foreach($this->classes as $class) {
+                $scores[$class] = $scores[$class] / $total_score;
+            }
+
             //Sort array in reverse order
             arsort($scores);
-
 
             //Classification is the key to the scores array
             $classification = key($scores);
