@@ -64,12 +64,13 @@
                     $sentance = str_replace ($negPrefix . ' ', $negPrefix, $sentance);
                 }//Close if statement
             }//Close categories function
-
+          
 
             //Tokenise Document
             $tokens = $this->_getTokens($sentance);
             // calculate the score in each category
             $total_words = 0;
+            $total_score = 0;
             // $ncat var set to zero
             $ncat = 0;
             //Empty array for the scores for each of the possible categories
@@ -85,8 +86,8 @@
                 foreach($tokens as $token){
 
                     //If statement so to ignore tokens which are either too long or too short or in the $ignoreList
-                    if(strlen($token) > $this->minTokenLength && strlen($token) < $this->maxTokenLength && !in_array($token, $this->ignoreList)){
-                      //If dictionary[token][class] is set
+                  if(strlen($token) > $this->minTokenLength && strlen($token) < $this->maxTokenLength && !in_array($token, $this->ignoreList)){//                      
+                    //If dictionary[token][class] is set
                         if(isset($this->dictionary[$token][$class])){
                             //Set count equal to it
                             $count = $this->dictionary[$token][$class];
@@ -104,7 +105,7 @@
                 $scores[$class] = $this->prior[$class] * $scores[$class];
 
             }//Close loop for classes
-
+            
             //Makes the scores relative percents
             foreach($this->classes as $class) {
                 $total_score += $scores[$class];
@@ -179,11 +180,10 @@
 
         public function getList($type) //Function to turn words from database in array
         {
-
             //Set up empty word list array
             $wordList = array();
 
-            $fn = dirname(dirname(__FILE__)) . '/data/data.' . $type . '.php';
+            $fn = dirname(dirname(__FILE__)) . '/phpInsight/data/data.' . $type . '.php';
             if (file_exists($fn)) {
                 $temp = file_get_contents($fn);
                 $words = unserialize($temp);
