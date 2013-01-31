@@ -33,15 +33,13 @@
         private $docCount = 0; //Document counter variable
         private $prior = array('pos' => 0.333333333333, 'neg' => 0.333333333333, 'neu' => 0.333333333333); //The original probability of a tweet being categorised as one of the three
 
-        //Function to categorise a tweet/sentance
-        public function categorise($sentance)
-        {
-            //Access these text files to get the dictionary for each category
+		public function __construct() {
+			//Access these text files to get the dictionary for each category
             $this->setDictionary('neg');
             $this->setDictionary('pos');
             $this->setDictionary('neu');
 
-            //If dictionary not get give error msg
+			          //If dictionary not get give error msg
             if (!isset($this->dictionary)) echo 'Error Dictionary not set';
 
             //Run function to get ignore list
@@ -56,6 +54,11 @@
             //If neg prefix list not set give error
             if (!isset($this->negPrefixList)) echo 'Error Ignore List not set';
 
+		}
+
+        //Function to categorise a tweet/sentance
+        public function categorise($sentance)
+        {
             //For each negative prefix in the list
             foreach($this->negPrefixList as $negPrefix){
                 //Search if that prefix is in the document
@@ -64,7 +67,7 @@
                     $sentance = str_replace ($negPrefix . ' ', $negPrefix, $sentance);
                 }//Close if statement
             }//Close categories function
-          
+
 
             //Tokenise Document
             $tokens = $this->_getTokens($sentance);
@@ -86,14 +89,14 @@
                 foreach($tokens as $token){
 
                     //If statement so to ignore tokens which are either too long or too short or in the $ignoreList
-                  if(strlen($token) > $this->minTokenLength && strlen($token) < $this->maxTokenLength && !in_array($token, $this->ignoreList)){//                      
-                    //If dictionary[token][class] is set
+                  if(strlen($token) > $this->minTokenLength && strlen($token) < $this->maxTokenLength && !in_array($token, $this->ignoreList)){//
+                        //If dictionary[token][class] is set
                         if(isset($this->dictionary[$token][$class])){
                             //Set count equal to it
                             $count = $this->dictionary[$token][$class];
                         }else{
-                          $count = 0;
-                        }                    
+                            $count = 0;
+                        }
 
                         //Score[class] is calcumeted by $scores[class] x $count +1 divided by the $classTokCounts[class] + $tokCount
                         $scores[$class] *= ($count + 1);
@@ -105,15 +108,15 @@
                 $scores[$class] = $this->prior[$class] * $scores[$class];
 
             }//Close loop for classes
-            
+
             //Makes the scores relative percents
             foreach($this->classes as $class) {
-                $total_score += $scores[$class];
-            }
+	        $total_score += $scores[$class];
+	    }
 
             foreach($this->classes as $class) {
-                $scores[$class] = $scores[$class] / $total_score;
-            }
+	        $scores[$class] = $scores[$class] / $total_score;
+	    }
 
             //Sort array in reverse order
             arsort($scores);
@@ -130,13 +133,13 @@
         //Function to insert words into array from database
         public function setDictionary($class) {
             /**
-             *  For some people this file extention causes some problems! 
+             *  For some people this file extention causes some problems!
              */
 
             $fn = dirname(dirname(__FILE__)) . '/phpInsight/data/data.' . $class . '.php';
             if (file_exists($fn)) {
-              $temp = file_get_contents($fn);
-              $words = unserialize($temp);
+                $temp = file_get_contents($fn);
+                $words = unserialize($temp);
             } else {
                 echo 'File does not exist: '.$fn;
             }
