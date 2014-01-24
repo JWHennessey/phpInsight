@@ -1,4 +1,5 @@
 <?php
+namespace PHPInsight;
 
 /*
   phpInsight is a Naive Bayes classifier to calculate sentiment. The program
@@ -114,7 +115,7 @@ class Sentiment {
 	 */
 	public function __construct() {
 
-		$this->dataFolder = dirname(__FILE__) . '/data/';
+		$this->dataFolder = __DIR__ . '/data/';
 
 		// Load and cache dictionaries
 		foreach ($this->classes as $class) {
@@ -202,7 +203,7 @@ class Sentiment {
 		}
 
 		foreach ($this->classes as $class) {
-			$scores[$class] = $scores[$class] / $total_score;
+			$scores[$class] = round($scores[$class] / $total_score, 3);
 		}
 
 		//Sort array in reverse order
@@ -275,7 +276,7 @@ class Sentiment {
 	 * @param str $string	String being broken up
 	 * @return array An array of tokens
 	 */
-	public function _getTokens($string) {
+	private function _getTokens($string) {
 
 		// Replace line endings with spaces
 		$string = str_replace("\r\n", " ", $string);
@@ -332,7 +333,7 @@ class Sentiment {
 	 * @param str $string
 	 * @return str
 	 */
-	public function _cleanString($string) {
+	private function _cleanString($string) {
 
 		$diac =
 				/* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .

@@ -1,0 +1,16 @@
+Changelog
+---------
+
+2.0.0
+
+* Codebase modernization (PHP namespaces, Composer compatibility)
+
+1.2
+
+* Error with how the positive dictionary was serialized fixed
+
+1.1
+
+* Improvements courtesy of Mark-H (https://github.com/Mark-H/) they can been
+  seen on his Tweetalyzer project (https://github.com/Mark-H/Tweetalyzer)
+* Load data from a serialized php file instead of the database
