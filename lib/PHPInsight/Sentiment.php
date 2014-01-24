@@ -203,7 +203,7 @@ class Sentiment {
 		}
 
 		foreach ($this->classes as $class) {
-			$scores[$class] = $scores[$class] / $total_score;
+			$scores[$class] = round($scores[$class] / $total_score, 3);
 		}
 
 		//Sort array in reverse order
