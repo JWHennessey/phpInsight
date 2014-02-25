@@ -111,35 +111,16 @@ class Sentiment {
 
 	/**
 	 * Class constructor
+	 * @param str $dataFolder base folder
 	 * Sets defaults and loads/caches dictionaries
 	 */
-	public function __construct() {
+	public function __construct($dataFolder = false) {
 
-		$this->dataFolder = __DIR__ . '/data/';
+		//set the base folder for the data models
+		$this->setDataFolder($dataFolder);
 
-		// Load and cache dictionaries
-		foreach ($this->classes as $class) {
-			if (!$this->setDictionary($class)) {
-				echo "Error: Dictionary for class '$class' could not be loaded";
-			}
-		}
-
-		if (!isset($this->dictionary) || empty($this->dictionary))
-			echo 'Error: Dictionaries not set';
-
-		//Run function to get ignore list
-		$this->ignoreList = $this->getList('ign');
-
-		//If ingnoreList not get give error message
-		if (!isset($this->ignoreList))
-			echo 'Error: Ignore List not set';
-
-		//Get the list of negative prefixes
-		$this->negPrefixList = $this->getList('prefix');
-
-		//If neg prefix list not set give error
-		if (!isset($this->negPrefixList))
-			echo 'Error: Ignore List not set';
+		//load and cache directories, get ignore and prefix lists
+		$this->loadDefaults();
 	}
 
 	/**
@@ -268,6 +249,60 @@ class Sentiment {
 		}//Close while loop going through everyline in the text file
 
 		return true;
+	}
+
+	/**
+	 * Set the base folder for loading data models
+	 * @param str  $dataFolder base folder
+	 * @param bool $loadDefaults true - load everything by default | false - just change the directory
+	 */
+	public function setDataFolder($dataFolder = false, $loadDefaults = false){
+		//if $dataFolder not provided, load default, else set the provided one
+		if($dataFolder == false){
+			$this->dataFolder = __DIR__ . '/data/';
+		}
+		else{
+			if(file_exists($data)){
+				$this->dataFolder = $dataFolder;
+			}
+			else{
+				echo 'Error: could not find the directory - '.$dataFolder;
+			}
+		}
+
+		//load default directories, ignore and prefixe lists
+		if($loadDefaults !== false){
+			$this->loadDefaults();
+		}
+	}
+
+	/**
+	 * Load and cache directories, get ignore and prefix lists
+	 */
+	private function loadDefaults(){
+		// Load and cache dictionaries
+		foreach ($this->classes as $class) {
+			if (!$this->setDictionary($class)) {
+				echo "Error: Dictionary for class '$class' could not be loaded";
+			}
+		}
+
+		if (!isset($this->dictionary) || empty($this->dictionary))
+			echo 'Error: Dictionaries not set';
+
+		//Run function to get ignore list
+		$this->ignoreList = $this->getList('ign');
+
+		//If ingnoreList not get give error message
+		if (!isset($this->ignoreList))
+			echo 'Error: Ignore List not set';
+
+		//Get the list of negative prefixes
+		$this->negPrefixList = $this->getList('prefix');
+
+		//If neg prefix list not set give error
+		if (!isset($this->negPrefixList))
+			echo 'Error: Ignore List not set';
 	}
 
 	/**
