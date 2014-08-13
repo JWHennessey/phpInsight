@@ -5,7 +5,7 @@
     "keywords": ["sentiment", "insight", "phpinsight"],
     "homepage": "https://github.com/JWHennessey/phpInsight",
     "license": "GPLv3 or later",
-    "version": "v1.0.0",
+    "version": "v2.0.2",
     "minimum-stability": "stable",
     "authors": [
         {
