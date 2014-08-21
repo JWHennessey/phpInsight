@@ -15,7 +15,6 @@ $strings = array(
 
 require_once __DIR__ . '/../autoload.php';
 $sentiment = new \PHPInsight\Sentiment();
-
 foreach ($strings as $string) {
 
 	// calculations:
