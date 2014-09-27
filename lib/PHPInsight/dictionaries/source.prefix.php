@@ -1,9 +1,6 @@
 <?php
-
-$prefix = array (
-  0 => 'isn\'t',
-  1 => 'aren\'t',
-  2 => 'not'
+$prefix = array(
+  'aren\'t',
+  'isn\'t',
+  'not'
 );
-
-?>
