@@ -262,7 +262,7 @@ class Sentiment {
 			$this->dataFolder = __DIR__ . '/data/';
 		}
 		else{
-			if(file_exists($data)){
+			if(file_exists($dataFolder)){
 				$this->dataFolder = $dataFolder;
 			}
 			else{
