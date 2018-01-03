@@ -321,9 +321,10 @@ class Sentiment {
 
 		//Make all texts lowercase as the database of words in in lowercase
 		$string = strtolower($string);
+		$string = preg_replace('/[[:punct:]]+/', '', $string);
 
 		//Break string into individual words using explode putting them into an array
-		$matches = explode(" ", $string);
+		$matches = explode(' ', $string);
 
 		//Return array with each individual token
 		return $matches;
