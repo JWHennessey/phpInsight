@@ -104,9 +104,9 @@ class Sentiment {
 	 * @var array
 	 */
 	private $prior = array(
-		'pos' => 0.333333333333,
-		'neg' => 0.333333333333,
-		'neu' => 0.333333333334
+		'pos' => 0.333,
+		'neg' => 0.333,
+		'neu' => 0.334,
 	);
 
 	/**
