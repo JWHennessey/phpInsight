@@ -388,6 +388,36 @@ class Sentiment {
 		return strtolower(strtr($string, $diac, 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn'));
 	}
 
+	/**
+	 * Deletes old data/data.* files
+	 * Creates new files from updated source fi
+	 */
+	public function reloadDictionaries(){
+
+		foreach($this->classes as $class){
+			$fn = "{$this->dataFolder}data.{$class}.php";
+			if (file_exists($fn)) {
+				unlink($fn);
+			} 
+		}
+
+		$dictionaries = __DIR__ . '/dictionaries/';
+
+		foreach($this->classes as $class){
+			$dict = "{$dictionaries}source.{$class}.php";
+
+			require_once($dict);
+
+			$data = $class;
+
+			$fn = "{$this->dataFolder}data.{$class}.php";
+			file_put_contents($fn, serialize($$data));
+		}
+
+		
+
+	}
+
 }
 
 ?>
